@@ -73,6 +73,7 @@
                 android:paddingRight="@dimen/space_12dp"
                 android:paddingStart="@dimen/space_12dp"
                 android:paddingTop="@dimen/space_4dp"
+                android:onClick="@{viewModel::scrollToTop}"
                 android:textAppearance="@style/TextSubheading"
                 android:textColor="@color/white"
                 android:visibility="gone"

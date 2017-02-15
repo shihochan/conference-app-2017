@@ -12,6 +12,7 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Display;
@@ -51,7 +52,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class SessionsFragment extends BaseFragment implements SessionViewModel.Callback {
+public class SessionsFragment extends BaseFragment implements SessionsViewModel.Callback, SessionViewModel.Callback {
 
     public static final String TAG = SessionsFragment.class.getSimpleName();
 
@@ -194,6 +195,8 @@ public class SessionsFragment extends BaseFragment implements SessionViewModel.C
                 }
             }
         });
+
+        viewModel.setCallback(this);
     }
 
     private void renderSessions(List<SessionViewModel> adjustedSessionViewModels) {
@@ -228,6 +231,11 @@ public class SessionsFragment extends BaseFragment implements SessionViewModel.C
                 binding.headerRow.addView(view);
             }
         }
+    }
+
+    @Override
+    public void scrollToTop() {
+        binding.recyclerView.smoothScrollToPosition(0);
     }
 
     @Override

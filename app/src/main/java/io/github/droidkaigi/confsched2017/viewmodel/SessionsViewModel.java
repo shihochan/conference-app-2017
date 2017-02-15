@@ -38,6 +38,8 @@ public class SessionsViewModel extends BaseObservable implements ViewModel {
 
     private List<Date> stimes;
 
+    private Callback callback;
+
     @Inject
     SessionsViewModel(SessionsRepository sessionsRepository, MySessionsRepository mySessionsRepository) {
         this.sessionsRepository = sessionsRepository;
@@ -166,6 +168,12 @@ public class SessionsViewModel extends BaseObservable implements ViewModel {
         return stimes;
     }
 
+    public void scrollToTop(@SuppressWarnings("unused") View view) {
+        if (callback != null) {
+            callback.scrollToTop();
+        }
+    }
+
     @Bindable
     public int getLoadingVisibility() {
         if (this.rooms == null) {
@@ -173,5 +181,14 @@ public class SessionsViewModel extends BaseObservable implements ViewModel {
         } else {
             return View.GONE;
         }
+    }
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
+
+    public interface Callback {
+
+        void scrollToTop();
     }
 }
